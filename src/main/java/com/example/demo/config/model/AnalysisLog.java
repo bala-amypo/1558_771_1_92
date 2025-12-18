@@ -49,9 +49,7 @@ public class AnalysisLog {
         loggedAt = LocalDateTime.now();
     }
 
-    // getters and setters
+    
 }
 
-
-    // getters & setters
 }

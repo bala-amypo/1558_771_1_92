@@ -20,5 +20,5 @@ public class HotspotZone {
     private Double centerLong;
     private String severityLevel;
 
-    // getters and setters
+    
 }

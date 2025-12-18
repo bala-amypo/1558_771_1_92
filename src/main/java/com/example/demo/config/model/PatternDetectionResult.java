@@ -22,5 +22,5 @@ public class PatternDetectionResult {
     private Integer crimeCount;
     private String detectedPattern;
 
-    // getters and setters
+    
 }
