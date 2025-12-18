@@ -1,10 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,11 +10,11 @@ public class CrimeReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String crimeType;
-    private String description;
-    private Double latitude;
-    private Double longitude;
+    private double latitude;
+    private double longitude;
     private LocalDateTime occurredAt;
 
-    
+    public double getLatitude() { return latitude; }
+    public double getLongitude() { return longitude; }
+    public LocalDateTime getOccurredAt() { return occurredAt; }
 }

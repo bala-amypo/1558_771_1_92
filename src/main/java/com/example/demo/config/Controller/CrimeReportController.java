@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.CrimeReport;
 import com.example.demo.service.CrimeReportService;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
