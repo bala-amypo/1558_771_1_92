@@ -1,12 +1,20 @@
 package com.example.demo.config;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+
 import java.io.IOException;
 
 public class JwtFilter implements Filter {
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+
+    @Override
+    public void doFilter(ServletRequest request,
+                         ServletResponse response,
+                         FilterChain chain)
             throws IOException, ServletException {
-        chain.doFilter(req, res);
+        chain.doFilter(request, response);
     }
 }

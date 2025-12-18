@@ -1,16 +1,25 @@
 package com.example.demo.config;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class JwtUtil {
 
     private static final String SECRET = "secretkey123";
 
-    public String generateToken(Long id, String email, String role) {
+    public String generateToken(Long userId, String email, String role) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("email", email);
+        claims.put("role", role);
+
         return Jwts.builder()
-                .setClaims(Map.of("userId", id, "email", email, "role", role))
+                .setClaims(claims)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();

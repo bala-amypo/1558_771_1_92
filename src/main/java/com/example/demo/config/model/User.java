@@ -1,6 +1,13 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,7 +24,9 @@ public class User {
     private String email;
 
     private String password;
+
     private String role;
+
     private LocalDateTime createdAt;
 
     public User() {
@@ -32,9 +41,9 @@ public class User {
     }
 
     @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    // getters & setters
+    // getters and setters
 }
