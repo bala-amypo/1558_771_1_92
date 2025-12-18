@@ -23,7 +23,7 @@ public class CrimeReportController {
     }
 
     @GetMapping
-    public List<CrimeReport> getAll() {
+    public List<CrimeReport> all() {
         return service.getAllReports();
     }
 }
