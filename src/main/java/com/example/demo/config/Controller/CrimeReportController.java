@@ -1,3 +1,12 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.CrimeReport;
+import com.example.demo.service.CrimeReportService;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/reports")
 public class CrimeReportController {
@@ -14,7 +23,7 @@ public class CrimeReportController {
     }
 
     @GetMapping
-    public List<CrimeReport> all() {
+    public List<CrimeReport> getAll() {
         return service.getAllReports();
     }
 }

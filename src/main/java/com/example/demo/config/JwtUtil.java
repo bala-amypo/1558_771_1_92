@@ -12,9 +12,9 @@ public class JwtUtil {
 
     private static final String SECRET = "secretkey123";
 
-    public String generateToken(Long userId, String email, String role) {
+    public String generateToken(Long id, String email, String role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", userId);
+        claims.put("userId", id);
         claims.put("email", email);
         claims.put("role", role);
 
