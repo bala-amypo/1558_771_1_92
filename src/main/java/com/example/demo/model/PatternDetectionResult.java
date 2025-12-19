@@ -1,7 +1,13 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pattern_detection_results")
@@ -12,18 +18,53 @@ public class PatternDetectionResult {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "zone_id")
     private HotspotZone zone;
 
-    private LocalDate analysisDate;
+    private LocalDateTime analysisDate;
 
     private Integer crimeCount;
 
     private String detectedPattern;
 
-    // ===== GETTERS =====
+    // ===== Getters and Setters =====
 
     public Long getId() {
         return id;
+    }
+ 
+    public void setId(Long id) {
+        this.id = id;
+    }
+ 
+    public HotspotZone getZone() {
+        return zone;
+    }
+ 
+    public void setZone(HotspotZone zone) {
+        this.zone = zone;
+    }
+ 
+    public LocalDateTime getAnalysisDate() {
+        return analysisDate;
+    }
+ 
+    public void setAnalysisDate(LocalDateTime analysisDate) {
+        this.analysisDate = analysisDate;
+    }
+ 
+    public Integer getCrimeCount() {
+        return crimeCount;
+    }
+ 
+    public void setCrimeCount(Integer crimeCount) {
+        this.crimeCount = crimeCount;
+    }
+ 
+    public String getDetectedPattern() {
+        return detectedPattern;
+    }
+ 
+    public void setDetectedPattern(String detectedPattern) {
+        this.detectedPattern = detectedPattern;
     }
 }
