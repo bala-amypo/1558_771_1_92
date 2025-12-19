@@ -4,28 +4,54 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "crime_reports")
 public class CrimeReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double latitude;
-    private double longitude;
-
-    private LocalDateTime occurredAt;
+    private String crimeType;
 
     private String description;
 
-    // getters & setters
-    public Long getId() { return id; }
-    public double getLatitude() { return latitude; }
-    public double getLongitude() { return longitude; }
-    public LocalDateTime getOccurredAt() { return occurredAt; }
-    public String getDescription() { return description; }
+    private Double latitude;
 
-    public void setLatitude(double latitude) { this.latitude = latitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
-    public void setOccurredAt(LocalDateTime occurredAt) { this.occurredAt = occurredAt; }
-    public void setDescription(String description) { this.description = description; }
+    private Double longitude;
+
+    private LocalDateTime occurredAt;
+
+    // ===== VALIDATION =====
+
+    @PrePersist
+    @PreUpdate
+    public void validate() {
+        if (latitude < -90 || latitude > 90) {
+            throw new IllegalArgumentException("Latitude must be between -90 and 90");
+        }
+        if (longitude < -180 || longitude > 180) {
+            throw new IllegalArgumentException("Longitude must be between -180 and 180");
+        }
+        if (occurredAt.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("OccurredAt cannot be in the future");
+        }
+    }
+
+    // ===== GETTERS =====
+
+    public Long getId() {
+        return id;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public LocalDateTime getOccurredAt() {
+        return occurredAt;
+    }
 }
