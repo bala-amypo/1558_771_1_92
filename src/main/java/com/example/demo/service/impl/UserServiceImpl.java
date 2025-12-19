@@ -9,22 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repo;
+    private final UserRepository repository;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public User register(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        return repository.save(user);
     }
 }
