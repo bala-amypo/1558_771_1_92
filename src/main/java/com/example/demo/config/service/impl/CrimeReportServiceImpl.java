@@ -5,7 +5,6 @@ import com.example.demo.repository.CrimeReportRepository;
 import com.example.demo.service.CrimeReportService;
 import com.example.demo.util.CoordinateValidator;
 import com.example.demo.util.DateValidator;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
