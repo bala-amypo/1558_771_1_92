@@ -16,21 +16,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        repository.findByEmail(user.getEmail()).ifPresent(u -> {
-            throw new RuntimeException("Email already exists");
-        });
         return repository.save(user);
     }
 
     @Override
-    public User login(String email, String password) {
-        User user = repository.findByEmail(email)
+    public User findByEmail(String email) {
+        return repository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid password");
-        }
-
-        return user;
     }
 }

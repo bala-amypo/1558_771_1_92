@@ -4,24 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 @Entity
-@Table(name = "hotspot_zones")
 public class HotspotZone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String zoneName;
 
-    private String severityLevel;   // ✅ REQUIRED FIELD
+    private Double centerLat;
+    private Double centerLong;
 
-    private String description;
+    // 🔴 THIS FIELD WAS MISSING
+    private String severityLevel; // LOW / MEDIUM / HIGH
 
-    public HotspotZone() {
-    }
+    public HotspotZone() {}
 
     public Long getId() {
         return id;
@@ -39,19 +40,27 @@ public class HotspotZone {
         this.zoneName = zoneName;
     }
 
+    public Double getCenterLat() {
+        return centerLat;
+    }
+
+    public void setCenterLat(Double centerLat) {
+        this.centerLat = centerLat;
+    }
+
+    public Double getCenterLong() {
+        return centerLong;
+    }
+
+    public void setCenterLong(Double centerLong) {
+        this.centerLong = centerLong;
+    }
+
     public String getSeverityLevel() {
         return severityLevel;
     }
 
     public void setSeverityLevel(String severityLevel) {
         this.severityLevel = severityLevel;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

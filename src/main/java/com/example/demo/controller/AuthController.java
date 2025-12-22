@@ -14,15 +14,19 @@ public class AuthController {
         this.service = service;
     }
 
-    // POST /auth/register
     @PostMapping("/register")
     public User register(@RequestBody User user) {
         return service.register(user);
     }
 
-    // POST /auth/login
     @PostMapping("/login")
-    public User login(@RequestBody User user) {
-        return service.login(user.getEmail(), user.getPassword());
+    public String login(@RequestBody User user) {
+        User dbUser = service.findByEmail(user.getEmail());
+
+        if (!dbUser.getPassword().equals(user.getPassword())) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return "Login successful";
     }
 }
