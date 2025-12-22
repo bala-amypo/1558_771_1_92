@@ -4,8 +4,6 @@ import com.example.demo.model.CrimeReport;
 import java.util.List;
 
 public interface CrimeReportService {
-
-    CrimeReport save(CrimeReport report);
-
-    List<CrimeReport> getAll();
+    CrimeReport addReport(CrimeReport report);
+    List<CrimeReport> getAllReports();
 }
