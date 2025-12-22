@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.HotspotZone;
 import com.example.demo.service.HotspotZoneService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/hotspots")
@@ -18,17 +17,12 @@ public class HotspotZoneController {
     }
 
     @PostMapping
-    public HotspotZone addZone(@RequestBody HotspotZone zone) {
-        return service.addZone(zone);
+    public HotspotZone create(@RequestBody HotspotZone zone) {
+        return service.save(zone);
     }
 
     @GetMapping
-    public List<HotspotZone> getAllZones() {
-        return service.getAllZones();
-    }
-
-    @GetMapping("/severity/{level}")
-    public List<HotspotZone> getBySeverity(@PathVariable String level) {
-        return service.getZonesBySeverity(level);
+    public List<HotspotZone> getAll() {
+        return service.getAll();
     }
 }

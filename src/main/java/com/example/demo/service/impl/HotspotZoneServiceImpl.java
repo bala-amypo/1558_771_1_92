@@ -1,12 +1,11 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.HotspotZoneService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HotspotZoneServiceImpl implements HotspotZoneService {
@@ -18,17 +17,12 @@ public class HotspotZoneServiceImpl implements HotspotZoneService {
     }
 
     @Override
-    public HotspotZone addZone(HotspotZone zone) {
+    public HotspotZone save(HotspotZone zone) {
         return repository.save(zone);
     }
 
     @Override
-    public List<HotspotZone> getZonesBySeverity(String severityLevel) {
-        return repository.findBySeverityLevel(severityLevel);
-    }
-
-    @Override
-    public List<HotspotZone> getAllZones() {
+    public List<HotspotZone> getAll() {
         return repository.findAll();
     }
 }
