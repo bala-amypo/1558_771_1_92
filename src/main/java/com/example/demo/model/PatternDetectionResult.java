@@ -1,70 +1,30 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pattern_detection_results")
 public class PatternDetectionResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private HotspotZone zone;
+    private Long zoneId;
+    private int totalReports;
+    private String message;
 
-    private LocalDateTime analysisDate;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    private Integer crimeCount;
+    public Long getZoneId() { return zoneId; }
+    public void setZoneId(Long zoneId) { this.zoneId = zoneId; }
 
-    private String detectedPattern;
+    public int getTotalReports() { return totalReports; }
+    public void setTotalReports(int totalReports) { this.totalReports = totalReports; }
 
-    // ===== Getters and Setters =====
-
-    public Long getId() {
-        return id;
-    }
- 
-    public void setId(Long id) {
-        this.id = id;
-    }
- 
-    public HotspotZone getZone() {
-        return zone;
-    }
- 
-    public void setZone(HotspotZone zone) {
-        this.zone = zone;
-    }
- 
-    public LocalDateTime getAnalysisDate() {
-        return analysisDate;
-    }
- 
-    public void setAnalysisDate(LocalDateTime analysisDate) {
-        this.analysisDate = analysisDate;
-    }
- 
-    public Integer getCrimeCount() {
-        return crimeCount;
-    }
- 
-    public void setCrimeCount(Integer crimeCount) {
-        this.crimeCount = crimeCount;
-    }
- 
-    public String getDetectedPattern() {
-        return detectedPattern;
-    }
- 
-    public void setDetectedPattern(String detectedPattern) {
-        this.detectedPattern = detectedPattern;
-    }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 }
