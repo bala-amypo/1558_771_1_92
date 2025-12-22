@@ -1,11 +1,12 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.repository.AnalysisLogRepository;
 import com.example.demo.service.AnalysisLogService;
-
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class AnalysisLogServiceImpl implements AnalysisLogService {

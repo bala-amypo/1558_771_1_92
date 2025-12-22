@@ -1,13 +1,14 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.PatternDetectionResult;
 import com.example.demo.service.PatternDetectionService;
 
 @RestController
+@RequestMapping("/patterns")
 public class PatternDetectionController {
 
     private final PatternDetectionService service;
@@ -16,8 +17,13 @@ public class PatternDetectionController {
         this.service = service;
     }
 
-    @GetMapping("/patterns/{zoneId}")
+    @PostMapping("/{zoneId}")
     public PatternDetectionResult detect(@PathVariable Long zoneId) {
         return service.detectPattern(zoneId);
+    }
+
+    @GetMapping("/{zoneId}")
+    public List<PatternDetectionResult> getByZone(@PathVariable Long zoneId) {
+        return service.getResultsByZone(zoneId);
     }
 }
