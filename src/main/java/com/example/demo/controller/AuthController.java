@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -15,18 +17,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return service.register(user);
+    public ResponseEntity<User> register(@RequestBody User user) {
+        return ResponseEntity.ok(service.register(user));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        User dbUser = service.findByEmail(user.getEmail());
-
-        if (!dbUser.getPassword().equals(user.getPassword())) {
-            throw new RuntimeException("Invalid password");
-        }
-
-        return "Login successful";
+    public ResponseEntity<User> login(@RequestBody User user) {
+        return ResponseEntity.ok(
+                service.login(user.getEmail(), user.getPassword())
+        );
     }
 }
