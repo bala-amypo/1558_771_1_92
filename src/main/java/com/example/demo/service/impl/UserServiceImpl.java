@@ -3,7 +3,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        // plain password for now (NO BCrypt)
         return repo.save(user);
     }
 

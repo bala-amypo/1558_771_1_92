@@ -1,20 +1,25 @@
 package com.example.demo.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Auth Controller")
 public class AuthController {
 
-    @PostMapping("/register")
-    public String register() {
-        return "User Registered";
+    private final UserService service;
+
+    public AuthController(UserService service) {
+        this.service = service;
     }
 
-    @PostMapping("/login")
-    public String login() {
-        return "User Logged In";
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return service.register(user);
     }
 }
