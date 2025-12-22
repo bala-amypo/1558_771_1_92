@@ -1,28 +1,23 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.CrimeReport;
-import com.example.demo.service.CrimeReportService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/crimes")
+@RequestMapping("/reports")
+@Tag(name = "Crime Reports")
 public class CrimeReportController {
 
-    private final CrimeReportService service;
-
-    public CrimeReportController(CrimeReportService service) {
-        this.service = service;
-    }
-
     @PostMapping
-    public CrimeReport create(@RequestBody CrimeReport report) {
-        return service.save(report);
+    public CrimeReport add(@RequestBody CrimeReport report) {
+        return report;
     }
 
     @GetMapping
-    public List<CrimeReport> getAll() {
-        return service.getAll();
+    public List<CrimeReport> all() {
+        return List.of();
     }
 }
