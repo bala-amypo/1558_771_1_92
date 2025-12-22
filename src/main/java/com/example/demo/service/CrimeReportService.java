@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.CrimeReport;
 import java.util.List;
+import com.example.demo.model.CrimeReport;
 
 public interface CrimeReportService {
-
     CrimeReport saveReport(CrimeReport report);
-
     List<CrimeReport> getAllReports();
 }
