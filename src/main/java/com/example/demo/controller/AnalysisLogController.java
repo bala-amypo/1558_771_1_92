@@ -1,24 +1,34 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.service.AnalysisLogService;
 
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
+@RequestMapping("/logs")
 public class AnalysisLogController {
 
-    private final AnalysisLogService service;
+    private final AnalysisLogService analysisLogService;
 
-    public AnalysisLogController(AnalysisLogService service) {
-        this.service = service;
+    public AnalysisLogController(AnalysisLogService analysisLogService) {
+        this.analysisLogService = analysisLogService;
     }
 
-    @GetMapping("/logs/{zoneId}")
-    public List<AnalysisLog> getLogs(@PathVariable Long zoneId) {
-        return service.getLogsByZone(zoneId);
+    // POST /logs/{zoneId}?message=...
+    @PostMapping("/{zoneId}")
+    public AnalysisLog addLog(
+            @PathVariable Long zoneId,
+            @RequestParam String message) {
+
+        return analysisLogService.addLog(zoneId, message);
+    }
+
+    // GET /logs/zone/{zoneId}
+    @GetMapping("/zone/{zoneId}")
+    public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
+        return analysisLogService.getLogsByZone(zoneId);
     }
 }
