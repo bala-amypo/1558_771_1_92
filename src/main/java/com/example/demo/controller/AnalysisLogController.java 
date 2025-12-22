@@ -1,20 +1,24 @@
 package com.example.demo.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.AnalysisLog;
+import com.example.demo.service.AnalysisLogService;
 
 @RestController
-@RequestMapping("/logs")
-@Tag(name = "Analysis Logs")
 public class AnalysisLogController {
 
-    @PostMapping("/{zoneId}")
-    public String add(@PathVariable Long zoneId) {
-        return "Log added";
+    private final AnalysisLogService service;
+
+    public AnalysisLogController(AnalysisLogService service) {
+        this.service = service;
     }
 
-    @GetMapping("/zone/{zoneId}")
-    public String get(@PathVariable Long zoneId) {
-        return "Logs fetched";
+    @GetMapping("/logs/{zoneId}")
+    public List<AnalysisLog> getLogs(@PathVariable Long zoneId) {
+        return service.getLogsByZone(zoneId);
     }
 }
