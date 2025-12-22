@@ -1,28 +1,43 @@
-package com.example.demo.controller;
+package com.example.demo.model;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import jakarta.persistence.*;
 
-import com.example.demo.model.PatternDetectionResult;
-import com.example.demo.service.PatternDetectionService;
+@Entity
+public class PatternDetectionResult {
 
-@RestController
-@RequestMapping("/patterns")
-public class PatternDetectionController {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final PatternDetectionService service;
+    private int totalReports;
+    private String message;
+    private Long zoneId;
 
-    public PatternDetectionController(PatternDetectionService service) {
-        this.service = service;
+    public Long getId() {
+        return id;
     }
 
-    @PostMapping("/detect/{zoneId}")
-    public PatternDetectionResult detect(@PathVariable Long zoneId) {
-        return service.detectPattern(zoneId);
+    public int getTotalReports() {
+        return totalReports;
     }
 
-    @GetMapping("/zone/{zoneId}")
-    public List<PatternDetectionResult> results(@PathVariable Long zoneId) {
-        return service.getResultsByZone(zoneId);
+    public void setTotalReports(int totalReports) {
+        this.totalReports = totalReports;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
     }
 }
