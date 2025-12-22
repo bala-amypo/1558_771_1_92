@@ -5,7 +5,6 @@ import com.example.demo.repository.PatternDetectionResultRepository;
 import com.example.demo.service.PatternDetectionService;
 
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,7 +17,11 @@ public class PatternDetectionServiceImpl implements PatternDetectionService {
     }
 
     @Override
-    public PatternDetectionResult saveResult(PatternDetectionResult result) {
+    public PatternDetectionResult detectPattern(Long zoneId) {
+        PatternDetectionResult result = new PatternDetectionResult();
+        result.setZoneId(zoneId);
+        result.setTotalReports(0);
+        result.setMessage("Analysis completed");
         return repository.save(result);
     }
 

@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
-
 import com.example.demo.model.CrimeReport;
 import com.example.demo.service.CrimeReportService;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reports")
@@ -17,12 +17,12 @@ public class CrimeReportController {
     }
 
     @PostMapping
-    public CrimeReport add(@RequestBody CrimeReport report) {
-        return service.addReport(report);
+    public CrimeReport create(@RequestBody CrimeReport report) {
+        return service.saveReport(report);
     }
 
     @GetMapping
-    public List<CrimeReport> all() {
+    public List<CrimeReport> getAll() {
         return service.getAllReports();
     }
 }

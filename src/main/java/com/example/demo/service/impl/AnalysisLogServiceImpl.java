@@ -5,7 +5,6 @@ import com.example.demo.repository.AnalysisLogRepository;
 import com.example.demo.service.AnalysisLogService;
 
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
