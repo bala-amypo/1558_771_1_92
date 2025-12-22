@@ -1,9 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class PatternDetectionResult {
@@ -12,6 +12,7 @@ public class PatternDetectionResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long zoneId;
     private int totalReports;
     private String message;
 
@@ -21,6 +22,14 @@ public class PatternDetectionResult {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
     }
 
     public int getTotalReports() {
