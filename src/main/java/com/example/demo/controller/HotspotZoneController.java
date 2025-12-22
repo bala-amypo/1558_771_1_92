@@ -18,11 +18,11 @@ public class HotspotZoneController {
 
     @PostMapping
     public HotspotZone create(@RequestBody HotspotZone zone) {
-        return service.save(zone);
+        return service.addZone(zone);
     }
 
     @GetMapping
     public List<HotspotZone> getAll() {
-        return service.getAll();
+        return service.getAllZones();
     }
 }
