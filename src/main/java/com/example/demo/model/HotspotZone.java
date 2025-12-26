@@ -3,25 +3,35 @@ package com.example.demo.model;
 public class HotspotZone {
     private Long id;
     private String zoneName;
-    private Double centerLat;  // Changed from latitude to match your error
-    private Double centerLong; // Changed from longitude to match your error
+    private Double latitude;
+    private Double longitude;
     private String severityLevel;
 
     public HotspotZone() {}
 
-    // Getters and Setters
+    // ID
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
+    // Zone Name
     public String getZoneName() { return zoneName; }
     public void setZoneName(String zoneName) { this.zoneName = zoneName; }
 
-    public Double getCenterLat() { return centerLat; }
-    public void setCenterLat(Double centerLat) { this.centerLat = centerLat; }
+    // Latitude / CenterLat
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+    
+    public Double getCenterLat() { return latitude; } // Alias for compatibility
+    public void setCenterLat(Double centerLat) { this.latitude = centerLat; }
 
-    public Double getCenterLong() { return centerLong; }
-    public void setCenterLong(Double centerLong) { this.centerLong = centerLong; }
+    // Longitude / CenterLong
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
+    
+    public Double getCenterLong() { return longitude; } // Alias for compatibility
+    public void setCenterLong(Double centerLong) { this.longitude = centerLong; }
 
+    // Severity
     public String getSeverityLevel() { return severityLevel; }
     public void setSeverityLevel(String severityLevel) { this.severityLevel = severityLevel; }
 }
