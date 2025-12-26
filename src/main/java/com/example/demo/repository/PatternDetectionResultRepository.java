@@ -1,12 +1,11 @@
 package com.example.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.PatternDetectionResult;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
-public interface PatternDetectionResultRepository
-        extends JpaRepository<PatternDetectionResult, Long> {
-
-    List<PatternDetectionResult> findByZoneId(Long zoneId);
+@Repository
+public interface PatternDetectionResultRepository extends JpaRepository<PatternDetectionResult, Long> {
+    List<PatternDetectionResult> findByZone_Id(Long zoneId);
 }
