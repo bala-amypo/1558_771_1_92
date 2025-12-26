@@ -52,4 +52,4 @@ public class CrimeReport {
     
     public LocalDateTime getOccurredAt() { return occurredAt; }
     public void setOccurredAt(LocalDateTime occurredAt) { this.occurredAt = occurredAt; }
-}   
+} 

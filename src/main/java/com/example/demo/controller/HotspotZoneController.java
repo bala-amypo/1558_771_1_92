@@ -2,29 +2,27 @@ package com.example.demo.controller;
 
 import com.example.demo.model.HotspotZone;
 import com.example.demo.service.HotspotZoneService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/zones")
+@RequestMapping("/api/hotspots")
 public class HotspotZoneController {
-    
-    private final HotspotZoneService zoneService;
-    
-    public HotspotZoneController(HotspotZoneService zoneService) {
-        this.zoneService = zoneService;
+
+    private final HotspotZoneService service;
+
+    public HotspotZoneController(HotspotZoneService service) {
+        this.service = service;
     }
-    
+
     @PostMapping
-    public ResponseEntity<HotspotZone> addZone(@RequestBody HotspotZone zone) {
-        HotspotZone savedZone = zoneService.addZone(zone);
-        return ResponseEntity.ok(savedZone);
+    public HotspotZone create(@RequestBody HotspotZone zone) {
+        return service.addZone(zone);
     }
-    
+
     @GetMapping
-    public ResponseEntity<List<HotspotZone>> getAllZones() {
-        List<HotspotZone> zones = zoneService.getAllZones();
-        return ResponseEntity.ok(zones);
+    public List<HotspotZone> getAll() {
+        return service.getAllZones();
     }
 }
