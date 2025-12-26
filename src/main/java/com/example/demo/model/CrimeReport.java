@@ -7,19 +7,17 @@ import java.time.LocalDateTime;
 public class CrimeReport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private String crimeType;
     private String description;
-
     private Double latitude;
     private Double longitude;
-
     private LocalDateTime occurredAt;
 
-    // getters & setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getCrimeType() { return crimeType; }
     public void setCrimeType(String crimeType) { this.crimeType = crimeType; }
@@ -36,4 +34,3 @@ public class CrimeReport {
     public LocalDateTime getOccurredAt() { return occurredAt; }
     public void setOccurredAt(LocalDateTime occurredAt) { this.occurredAt = occurredAt; }
 }
-        

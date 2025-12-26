@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class PatternDetectionResult {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private Integer crimeCount;
@@ -17,7 +17,8 @@ public class PatternDetectionResult {
     @ManyToOne
     private HotspotZone zone;
 
-    // getters & setters
+    public Long getId() { return id; }
+
     public Integer getCrimeCount() { return crimeCount; }
     public void setCrimeCount(Integer crimeCount) { this.crimeCount = crimeCount; }
 

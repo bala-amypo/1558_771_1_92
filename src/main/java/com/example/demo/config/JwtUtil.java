@@ -2,12 +2,14 @@ package com.example.demo.config;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+
 import java.security.Key;
 import java.util.Date;
 
 public class JwtUtil {
 
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final long EXP = 1000 * 60 * 60;
 
     public String generateToken(Long userId, String email, String role) {
         return Jwts.builder()
@@ -15,6 +17,7 @@ public class JwtUtil {
                 .claim("email", email)
                 .claim("role", role)
                 .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXP))
                 .signWith(key)
                 .compact();
     }

@@ -7,16 +7,18 @@ import java.time.LocalDateTime;
 public class AnalysisLog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private String message;
+
     private LocalDateTime loggedAt = LocalDateTime.now();
 
     @ManyToOne
     private HotspotZone zone;
 
-    // getters & setters
+    public Long getId() { return id; }
+
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
