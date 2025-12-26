@@ -1,30 +1,29 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "analysis_logs")
 public class AnalysisLog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String message;
-
-    private LocalDateTime loggedAt = LocalDateTime.now();
-
     @ManyToOne
+    @JoinColumn(name = "zone_id") // This links to the HotspotZone
     private HotspotZone zone;
+
+    private String logDetails;
 
     public AnalysisLog() {}
 
     public Long getId() { return id; }
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
-
-    public LocalDateTime getLoggedAt() { return loggedAt; }
+    public void setId(Long id) { this.id = id; }
 
     public HotspotZone getZone() { return zone; }
     public void setZone(HotspotZone zone) { this.zone = zone; }
+
+    public String getLogDetails() { return logDetails; }
+    public void setLogDetails(String logDetails) { this.logDetails = logDetails; }
 }
