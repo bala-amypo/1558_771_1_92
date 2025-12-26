@@ -1,42 +1,26 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repo;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
+    @Autowired
+    public UserServiceImpl(BCryptPasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User register(User user) {
-        if (repo.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
-        user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    @Override
-    public User login(String email, String password) {
-        User user = findByEmail(email);
-        if (!encoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Invalid password");
-        }
+    public User registerUser(User user) {
+        // Encrypt the password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Logic to save user to repository goes here
         return user;
     }
 }
