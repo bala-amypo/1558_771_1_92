@@ -4,25 +4,31 @@ import com.example.demo.model.HotspotZone;
 import com.example.demo.repository.HotspotZoneRepository;
 import com.example.demo.service.HotspotZoneService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class HotspotZoneServiceImpl implements HotspotZoneService {
 
-    private final HotspotZoneRepository repository;
+    private final HotspotZoneRepository repo;
 
-    public HotspotZoneServiceImpl(HotspotZoneRepository repository) {
-        this.repository = repository;
+    public HotspotZoneServiceImpl(HotspotZoneRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public HotspotZone save(HotspotZone zone) {
-        return repository.save(zone);
+    public HotspotZone addZone(HotspotZone z) {
+        if (repo.existsByZoneName(z.getZoneName()))
+            throw new RuntimeException("Zone exists");
+
+        if (Math.abs(z.getCenterLat()) > 90 || Math.abs(z.getCenterLong()) > 180)
+            throw new RuntimeException("Invalid latitude/longitude");
+
+        z.setLatitude(z.getCenterLat());
+        z.setLongitude(z.getCenterLong());
+
+        return repo.save(z);
     }
 
-    @Override
-    public List<HotspotZone> getAll() {
-        return repository.findAll();
+    public List<HotspotZone> getAllZones() {
+        return repo.findAll();
     }
 }
