@@ -15,10 +15,10 @@ public class CoordinateValidator {
     
     public void validateCoordinates(Double latitude, Double longitude) {
         if (!isValidLatitude(latitude)) {
-            throw new IllegalArgumentException("Invalid latitude value: " + latitude);
+            throw new IllegalArgumentException("Invalid latitude: must be between -90 and 90");
         }
         if (!isValidLongitude(longitude)) {
-            throw new IllegalArgumentException("Invalid longitude value: " + longitude);
+            throw new IllegalArgumentException("Invalid longitude: must be between -180 and 180");
         }
     }
 }
