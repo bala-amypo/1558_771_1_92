@@ -1,11 +1,21 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.CrimeReport;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data. jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data. repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface CrimeReportRepository extends JpaRepository<CrimeReport, Long> {
-
-    @Query("SELECT c FROM CrimeReport c WHERE c.latitude BETWEEN ?1 AND ?2 AND c.longitude BETWEEN ?3 AND ?4")
-    List<CrimeReport> findByLatLongRange(Double lat1, Double lat2, Double lon1, Double lon2);
+    
+    @Query("SELECT c FROM CrimeReport c WHERE c.latitude BETWEEN :minLat AND :maxLat AND c.longitude BETWEEN :minLong AND :maxLong")
+    List<CrimeReport> findByLatLongRange(
+        @Param("minLat") double minLat,
+        @Param("maxLat") double maxLat,
+        @Param("minLong") double minLong,
+        @Param("maxLong") double maxLong
+    );
 }
