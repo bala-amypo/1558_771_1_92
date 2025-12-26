@@ -2,33 +2,32 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AnalysisLog;
 import com.example.demo.service.AnalysisLogService;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/logs")
 public class AnalysisLogController {
-
-    private final AnalysisLogService analysisLogService;
-
-    public AnalysisLogController(AnalysisLogService analysisLogService) {
-        this.analysisLogService = analysisLogService;
+    
+    private final AnalysisLogService logService;
+    
+    public AnalysisLogController(AnalysisLogService logService) {
+        this.logService = logService;
     }
-
-    // POST /logs/{zoneId}?message=...
+    
     @PostMapping("/{zoneId}")
-    public AnalysisLog addLog(
-            @PathVariable Long zoneId,
-            @RequestParam String message) {
-
-        return analysisLogService.addLog(zoneId, message);
+    public ResponseEntity<AnalysisLog> addLog(@PathVariable Long zoneId, 
+                                              @RequestBody Map<String, String> request) {
+        String message = request.get("message");
+        AnalysisLog log = logService.addLog(zoneId, message);
+        return ResponseEntity.ok(log);
     }
-
-    // GET /logs/zone/{zoneId}
+    
     @GetMapping("/zone/{zoneId}")
-    public List<AnalysisLog> getLogsByZone(@PathVariable Long zoneId) {
-        return analysisLogService.getLogsByZone(zoneId);
+    public ResponseEntity<List<AnalysisLog>> getLogsByZone(@PathVariable Long zoneId) {
+        List<AnalysisLog> logs = logService.getLogsByZone(zoneId);
+        return ResponseEntity.ok(logs);
     }
 }
