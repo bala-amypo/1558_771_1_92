@@ -1,21 +1,15 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class HotspotZone {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String zoneName;
-
-    private Double centerLat;
-    private Double centerLong;
-
+    private Double centerLat;  // Changed from latitude to match your error
+    private Double centerLong; // Changed from longitude to match your error
     private String severityLevel;
 
+    public HotspotZone() {}
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
