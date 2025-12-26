@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.PatternDetectionResult;
+import com.example.demo.model.HotspotZone;
 import java.util.List;
 
 public interface PatternDetectionService {
-    PatternDetectionResult detectPattern(Long zoneId);
-    List<PatternDetectionResult> getResultsByZone(Long zoneId);
+    void detectPatterns();
+    String analyzeZone(HotspotZone zone);
 }

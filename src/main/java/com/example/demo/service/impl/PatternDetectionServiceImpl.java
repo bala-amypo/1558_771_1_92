@@ -1,19 +1,23 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.HotspotZone;
+import com.example.demo.service.PatternDetectionService;
 import org.springframework.stereotype.Service;
 
-@Service
-public class PatternDetectionServiceImpl {
+@Service // This tells Spring to manage this class
+public class PatternDetectionServiceImpl implements PatternDetectionService {
 
-    public void analyzeZone(HotspotZone zone) {
-        // Uses the alias methods from the model
-        Double lat = zone.getCenterLat(); 
-        
-        if (lat != null && lat > 40.0) {
-            zone.setSeverityLevel("HIGH");
-        } else {
-            zone.setSeverityLevel("LOW");
+    @Override
+    public void detectPatterns() {
+        // Your logic for detecting patterns
+    }
+
+    @Override
+    public String analyzeZone(HotspotZone zone) {
+        // Example logic
+        if (zone.getCenterLat() != null && zone.getCenterLat() > 40.0) {
+            return "High Risk Pattern";
         }
+        return "Normal";
     }
 }
