@@ -18,8 +18,7 @@ public class PatternDetectionServiceImpl implements PatternDetectionService {
             HotspotZoneRepository zoneRepo,
             CrimeReportRepository reportRepo,
             PatternDetectionResultRepository resultRepo,
-            AnalysisLogRepository logRepo
-    ) {
+            AnalysisLogRepository logRepo) {
         this.zoneRepo = zoneRepo;
         this.reportRepo = reportRepo;
         this.resultRepo = resultRepo;
@@ -32,15 +31,28 @@ public class PatternDetectionServiceImpl implements PatternDetectionService {
                 .orElseThrow(() -> new RuntimeException("Zone not found"));
 
         List<CrimeReport> reports =
-                reportRepo.findByLatLongRange(0,0,0,0);
+                reportRepo.findByLatLongRange(
+                        zone.getCenterLat() - 0.1,
+                        zone.getCenterLat() + 0.1,
+                        zone.getCenterLong() - 0.1,
+                        zone.getCenterLong() + 0.1
+                );
 
         PatternDetectionResult r = new PatternDetectionResult();
         r.setZone(zone);
         r.setCrimeCount(reports.size());
-        r.setDetectedPattern(reports.size() > 5 ? "HIGH" : "NO PATTERN");
         r.setAnalysisDate(LocalDate.now());
 
-        logRepo.save(new AnalysisLog("Pattern checked", zone));
+        if (reports.size() > 5) {
+            r.setDetectedPattern("HIGH RISK");
+            zone.setSeverityLevel("HIGH");
+        } else {
+            r.setDetectedPattern("NO RISK");
+            zone.setSeverityLevel("LOW");
+        }
+
+        zoneRepo.save(zone);
+        logRepo.save(new AnalysisLog());
         return resultRepo.save(r);
     }
 

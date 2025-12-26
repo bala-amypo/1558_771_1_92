@@ -4,6 +4,9 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repo;
@@ -15,9 +18,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         if (repo.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("User already exists");
+            throw new RuntimeException("Email already exists");
         }
-        user.setPassword("HASHED_" + user.getPassword());
+        user.setPassword(hash(user.getPassword()));
         return repo.save(user);
     }
 
@@ -26,5 +29,14 @@ public class UserServiceImpl implements UserService {
         return repo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    private String hash(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] out = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            return new String(out);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
-    

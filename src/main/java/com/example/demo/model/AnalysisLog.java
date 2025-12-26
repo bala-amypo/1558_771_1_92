@@ -17,8 +17,9 @@ public class AnalysisLog {
     @ManyToOne
     private HotspotZone zone;
 
-    public Long getId() { return id; }
+    public AnalysisLog() {}
 
+    public Long getId() { return id; }
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 

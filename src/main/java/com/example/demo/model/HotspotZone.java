@@ -9,15 +9,11 @@ public class HotspotZone {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
     private String zoneName;
-
     private Double centerLat;
     private Double centerLong;
+    private String severityLevel;
 
-    private String severityLevel; // 🔥 REQUIRED
-
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
