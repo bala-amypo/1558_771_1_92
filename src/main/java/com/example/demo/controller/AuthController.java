@@ -6,15 +6,18 @@ import com.example.demo.service.UserService;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     private final UserService service;
-    private final JwtUtil jwtUtil = new JwtUtil();
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserService service) {
+    public AuthController(UserService service, JwtUtil jwtUtil) {
         this.service = service;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")
@@ -23,8 +26,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email) {
-        User user = service.findByEmail(email);
-        return jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
+    public Map<String, String> login(@RequestBody Map<String, String> req) {
+        User user = service.findByEmail(req.get("email"));
+        String token = jwtUtil.generateToken(
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
+        return Map.of("token", token);
     }
 }
