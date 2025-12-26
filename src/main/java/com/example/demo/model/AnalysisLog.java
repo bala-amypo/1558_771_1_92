@@ -1,12 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,48 +11,17 @@ public class AnalysisLog {
     private Long id;
 
     private String message;
-
-    private LocalDateTime loggedAt;
+    private LocalDateTime loggedAt = LocalDateTime.now();
 
     @ManyToOne
     private HotspotZone zone;
 
-    @PrePersist
-    public void onCreate() {
-        this.loggedAt = LocalDateTime.now();
-    }
+    // getters & setters
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
 
-    // ===== Getters & Setters =====
+    public LocalDateTime getLoggedAt() { return loggedAt; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public LocalDateTime getLoggedAt() {
-        return loggedAt;
-    }
-
-    public void setLoggedAt(LocalDateTime loggedAt) {
-        this.loggedAt = loggedAt;
-    }
-
-    public HotspotZone getZone() {
-        return zone;
-    }
-
-    public void setZone(HotspotZone zone) {
-        this.zone = zone;
-    }
+    public HotspotZone getZone() { return zone; }
+    public void setZone(HotspotZone zone) { this.zone = zone; }
 }
