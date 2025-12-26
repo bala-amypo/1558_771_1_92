@@ -3,7 +3,6 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "hotspot_zone")
 public class HotspotZone {
 
     @Id
@@ -16,8 +15,9 @@ public class HotspotZone {
     private Double centerLat;
     private Double centerLong;
 
-    private String severityLevel = "LOW";
+    private String severityLevel; // 🔥 REQUIRED
 
+    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
