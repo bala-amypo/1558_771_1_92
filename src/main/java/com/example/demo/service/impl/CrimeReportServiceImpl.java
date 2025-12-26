@@ -1,9 +1,27 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.CrimeReport;
+import com.example.demo.repository.CrimeReportRepository;
+import com.example.demo.service.CrimeReportService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-public interface CrimeReportService {
-    CrimeReport addReport(CrimeReport report);
-    List<CrimeReport> getAllReports();
+@Service
+public class CrimeReportServiceImpl implements CrimeReportService {
+
+    private final CrimeReportRepository repo;
+
+    public CrimeReportServiceImpl(CrimeReportRepository repo) {
+        this.repo = repo;
+    }
+
+    public CrimeReport addReport(CrimeReport r) {
+        if (r.getLatitude() == null || Math.abs(r.getLatitude()) > 90)
+            throw new RuntimeException("Invalid latitude");
+        return repo.save(r);
+    }
+
+    public List<CrimeReport> getAllReports() {
+        return repo.findAll();
+    }
 }
