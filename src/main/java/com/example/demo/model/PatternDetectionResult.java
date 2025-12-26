@@ -1,9 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class PatternDetectionResult {
@@ -12,39 +10,23 @@ public class PatternDetectionResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long zoneId;
-    private int totalReports;
-    private String message;
+    private Integer crimeCount;
+    private String detectedPattern;
+    private LocalDate analysisDate = LocalDate.now();
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    private HotspotZone zone;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // getters & setters
+    public Integer getCrimeCount() { return crimeCount; }
+    public void setCrimeCount(Integer crimeCount) { this.crimeCount = crimeCount; }
 
-    public Long getZoneId() {
-        return zoneId;
-    }
+    public String getDetectedPattern() { return detectedPattern; }
+    public void setDetectedPattern(String detectedPattern) { this.detectedPattern = detectedPattern; }
 
-    public void setZoneId(Long zoneId) {
-        this.zoneId = zoneId;
-    }
+    public LocalDate getAnalysisDate() { return analysisDate; }
+    public void setAnalysisDate(LocalDate analysisDate) { this.analysisDate = analysisDate; }
 
-    public int getTotalReports() {
-        return totalReports;
-    }
-
-    public void setTotalReports(int totalReports) {
-        this.totalReports = totalReports;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    public HotspotZone getZone() { return zone; }
+    public void setZone(HotspotZone zone) { this.zone = zone; }
 }

@@ -10,57 +10,37 @@ public class HotspotZone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "zone_name", nullable = false)
+    @Column(unique = true)
     private String zoneName;
 
-    @Column(name = "latitude", nullable = false)
-    private Double latitude;
+    private Double centerLat;
+    private Double centerLong;
 
-    @Column(name = "longitude", nullable = false)
+    private String severityLevel = "LOW";
+
+    // REQUIRED to fix SQL error
+    private Double latitude;
     private Double longitude;
 
-    @Column(name = "severity_level", nullable = false)
-    private String severityLevel;
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public HotspotZone() {}
+    public String getZoneName() { return zoneName; }
+    public void setZoneName(String zoneName) { this.zoneName = zoneName; }
 
-    public Long getId() {
-        return id;
-    }
+    public Double getCenterLat() { return centerLat; }
+    public void setCenterLat(Double centerLat) { this.centerLat = centerLat; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Double getCenterLong() { return centerLong; }
+    public void setCenterLong(Double centerLong) { this.centerLong = centerLong; }
 
-    public String getZoneName() {
-        return zoneName;
-    }
+    public String getSeverityLevel() { return severityLevel; }
+    public void setSeverityLevel(String severityLevel) { this.severityLevel = severityLevel; }
 
-    public void setZoneName(String zoneName) {
-        this.zoneName = zoneName;
-    }
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getSeverityLevel() {
-        return severityLevel;
-    }
-
-    public void setSeverityLevel(String severityLevel) {
-        this.severityLevel = severityLevel;
-    }
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
 }
