@@ -6,12 +6,14 @@ import jakarta.persistence.*;
 public class HotspotZone {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String zoneName;
+
     private Double centerLat;
     private Double centerLong;
+
     private String severityLevel;
 
     public Long getId() { return id; }

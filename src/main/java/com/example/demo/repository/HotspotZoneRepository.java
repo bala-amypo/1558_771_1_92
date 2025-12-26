@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HotspotZoneRepository extends JpaRepository<HotspotZone, Long> {
-    boolean existsByZoneName(String name);
-    Optional<HotspotZone> findByZoneName(String name);
+
+    boolean existsByZoneName(String zoneName);
+
+    Optional<HotspotZone> findByZoneName(String zoneName);
+
     List<HotspotZone> findBySeverityLevel(String severityLevel);
 }
