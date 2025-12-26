@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.AnalysisLog;
+import com.example.demo.model.PatternDetectionResult;
 import java.util.List;
 
-public interface AnalysisLogService {
-    AnalysisLog addLog(Long zoneId, String message);
-    List<AnalysisLog> getLogsByZone(Long zoneId);
+public interface PatternDetectionService {
+    PatternDetectionResult detectPattern(Long zoneId);
+    List<PatternDetectionResult> getResultsByZone(Long zoneId);
 }
