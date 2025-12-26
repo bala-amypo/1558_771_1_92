@@ -4,12 +4,14 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repo;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserServiceImpl(UserRepository repo) {
         this.repo = repo;
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
         if (repo.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-        user.setPassword(hash(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
         return repo.save(user);
     }
 
@@ -28,15 +30,5 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return repo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    private String hash(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] out = md.digest(password.getBytes(StandardCharsets.UTF_8));
-            return new String(out);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

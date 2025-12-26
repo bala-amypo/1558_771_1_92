@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService service;
-    private final JwtUtil jwt;
+    private final JwtUtil jwtUtil = new JwtUtil();
 
-    public AuthController(UserService service, JwtUtil jwt) {
+    public AuthController(UserService service) {
         this.service = service;
-        this.jwt = jwt;
     }
 
     @PostMapping("/register")
@@ -25,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam String email) {
-        User u = service.findByEmail(email);
-        return jwt.generateToken(u.getId(), u.getEmail(), u.getRole());
+        User user = service.findByEmail(email);
+        return jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
     }
 }
