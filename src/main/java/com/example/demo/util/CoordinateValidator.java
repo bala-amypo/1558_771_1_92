@@ -1,13 +1,24 @@
 package com.example.demo.util;
 
-public class CoordinateValidator {
+import org.springframework.stereotype.Component;
 
-    public static void validate(double latitude, double longitude) {
-        if (latitude < -90 || latitude > 90) {
-            throw new IllegalArgumentException("latitude");
+@Component
+public class CoordinateValidator {
+    
+    public boolean isValidLatitude(Double latitude) {
+        return latitude != null && latitude >= -90 && latitude <= 90;
+    }
+    
+    public boolean isValidLongitude(Double longitude) {
+        return longitude != null && longitude >= -180 && longitude <= 180;
+    }
+    
+    public void validateCoordinates(Double latitude, Double longitude) {
+        if (!isValidLatitude(latitude)) {
+            throw new IllegalArgumentException("Invalid latitude value: " + latitude);
         }
-        if (longitude < -180 || longitude > 180) {
-            throw new IllegalArgumentException("longitude");
+        if (!isValidLongitude(longitude)) {
+            throw new IllegalArgumentException("Invalid longitude value: " + longitude);
         }
     }
 }
