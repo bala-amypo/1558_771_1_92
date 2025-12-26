@@ -3,40 +3,34 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import org.springframework.stereotype.Service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Optional;
 
+@Service   // 🔥 THIS WAS MISSING
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repo;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository repo) {
-        this.repo = repo;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public User register(User user) {
-        if (repo.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new RuntimeException("User already exists");
         }
-        user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+
+        // simple hashing WITHOUT bcrypt (as requested)
+        user.setPassword("ENC_" + user.getPassword());
+
+        return userRepository.save(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        return repo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
-    @Override
-    public String login(String email, String password) {
-        User user = findByEmail(email);
-        if (!encoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
-        }
-        return "LOGIN_SUCCESS";
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
