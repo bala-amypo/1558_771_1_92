@@ -1,21 +1,21 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import jakarta. persistence.*;
+import java.time. LocalDateTime;
 
 @Entity
 @Table(name = "analysis_logs")
 public class AnalysisLog {
     
     @Id
-    @GeneratedValue(strategy = GenerationType. IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String message;
     private LocalDateTime loggedAt;
     
     @ManyToOne
-    @JoinColumn(name = "zone_id", referencedColumnName = "id")
+    @JoinColumn(name = "zone_id")
     private HotspotZone zone;
     
     @PrePersist
